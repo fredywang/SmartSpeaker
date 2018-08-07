@@ -10,10 +10,6 @@ buildscript {
 	}
 }
 
-plugins {
-    id 'com.google.cloud.tools.jib' version '0.9.8'
-}
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -28,7 +24,7 @@ bootJar {
 }
 
 sourceCompatibility = 1.8
-//targetCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
@@ -81,27 +77,3 @@ dependencies {
     testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.1' */
          
 }
-
-jib {
-    from {
-        image = '127.0.0.1/openjdk:8-jre'
-        //credHelper = 'osxkeychain'
-    }
-    to {
-        image = '127.0.0.1/smartspeaker/smart_speaker_docker:0.1.0'
-        //credHelper = 'osxkeychain'
-        // Or use auth like below if you are not login
-        // Defined in gradle.properties
-        //auth {
-        //    username = dockerUsername
-        //    password = dockerPassword
-        //}
-    }
-    container {
-        jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Duser.timezone=GMT+08', '-Xdebug']
-        mainClass = 'com.twm.smartSpeaker.Application'
-        args = ['-Dspring.profiles.active=uat']
-        ports = ['8080']
-    }
-}
-

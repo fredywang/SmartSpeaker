@@ -4,20 +4,21 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		maven { url "https://plugins.gradle.org/m2/"}
 	} 
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	//	classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.20.1')
+		classpath 'gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:0.9.8'
 	}
-}
-
-plugins {
-    id 'com.google.cloud.tools.jib' version '0.9.8'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'com.palantir.docker'
+apply plugin: 'com.google.cloud.tools.jib'
 
 group = 'springbootdocker'
 version = '0.0.1-SNAPSHOT'
@@ -27,8 +28,19 @@ bootJar {
     version =  '0.1.0'
 }
 
+jib.to.image = "gcr.io/jibdocker/smart_speaker_docker:0.1.0"
+
+/*
+docker {
+    dependsOn build
+    name "${project.group}/${bootJar.baseName}"
+    files bootJar.archivePath
+    buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
+    dockerfile = file('docker/Dockerfile')
+} */
+
 sourceCompatibility = 1.8
-//targetCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
@@ -62,9 +74,7 @@ dependencies {
     compile group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '2.1.0'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     compile 'com.google.guava:guava:23.6-jre'   
- 
-
-   /*
+    /*
     testCompile('com.jayway.restassured:rest-assured:2.3.3')
     testCompile('org.hamcrest:hamcrest-core:1.3')
  	testCompile('org.springframework.boot:spring-boot-starter-test')
@@ -81,27 +91,3 @@ dependencies {
     testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.1' */
          
 }
-
-jib {
-    from {
-        image = '127.0.0.1/openjdk:8-jre'
-        //credHelper = 'osxkeychain'
-    }
-    to {
-        image = '127.0.0.1/smartspeaker/smart_speaker_docker:0.1.0'
-        //credHelper = 'osxkeychain'
-        // Or use auth like below if you are not login
-        // Defined in gradle.properties
-        //auth {
-        //    username = dockerUsername
-        //    password = dockerPassword
-        //}
-    }
-    container {
-        jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Duser.timezone=GMT+08', '-Xdebug']
-        mainClass = 'com.twm.smartSpeaker.Application'
-        args = ['-Dspring.profiles.active=uat']
-        ports = ['8080']
-    }
-}
-

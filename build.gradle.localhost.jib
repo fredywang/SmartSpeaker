@@ -88,7 +88,7 @@ jib {
         //credHelper = 'osxkeychain'
     }
     to {
-        image = '127.0.0.1/smartspeaker/smart_speaker_docker:0.1.0'
+        image = '127.0.0.1:5000/smartspeaker/smart_speaker_docker:0.1.0'
         //credHelper = 'osxkeychain'
         // Or use auth like below if you are not login
         // Defined in gradle.properties
