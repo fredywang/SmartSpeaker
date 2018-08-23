@@ -62,7 +62,8 @@ dependencies {
     compile group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '2.1.0'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     compile 'com.google.guava:guava:23.6-jre'   
- 
+    //rabbitmq
+ 	compile("org.springframework.boot:spring-boot-starter-amqp")
 
    /*
     testCompile('com.jayway.restassured:rest-assured:2.3.3')
@@ -80,28 +81,5 @@ dependencies {
     testCompile group: 'org.dbunit', name: 'dbunit', version: '2.4.9'
     testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.1' */
          
-}
-
-jib {
-    from {
-        image = '127.0.0.1/openjdk:8-jre'
-        //credHelper = 'osxkeychain'
-    }
-    to {
-        image = '127.0.0.1/smartspeaker/smart_speaker_docker:0.1.0'
-        //credHelper = 'osxkeychain'
-        // Or use auth like below if you are not login
-        // Defined in gradle.properties
-        //auth {
-        //    username = dockerUsername
-        //    password = dockerPassword
-        //}
-    }
-    container {
-        jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Duser.timezone=GMT+08', '-Xdebug']
-        mainClass = 'com.twm.smartSpeaker.Application'
-        args = ['-Dspring.profiles.active=uat']
-        ports = ['8080']
-    }
 }
 
