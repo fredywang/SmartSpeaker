@@ -18,7 +18,7 @@ public class Sender {
 
 	public void send(String id) {
 		String context = "hello "+ id + " , date = "+ new Date();
-		System.out.println("Sender : " + context);
+		//System.out.println("Sender : " + context);
 		logger.info("*****************Sender : " + context + "*******************");
 		this.rabbitTemplate.convertAndSend("smartSpeaker", context);
 	}

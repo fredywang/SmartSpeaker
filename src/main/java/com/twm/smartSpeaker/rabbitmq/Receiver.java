@@ -14,10 +14,10 @@ public class Receiver {
     //@RabbitHandler
 	@RabbitListener(queues = "smartSpeaker")
     public void process(String smartSpeaker) {
-    	logger.info("Receiver : " + smartSpeaker);
+    	//logger.info("Receiver : " + smartSpeaker);
     	logger.info("************************ print = " + smartSpeaker + "************************");
-        System.out.println("Receiver : " + smartSpeaker);
-        System.out.println("************************ print = " + smartSpeaker + "************************");
+        //System.out.println("Receiver : " + smartSpeaker);
+        //System.out.println("************************ print = " + smartSpeaker + "************************");
     }
 
 }
