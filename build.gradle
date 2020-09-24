@@ -17,11 +17,11 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'springbootdocker'
-version = '0.0.1-SNAPSHOT'
+//version = '0.0.1-SNAPSHOT'
 
 bootJar {
     baseName = 'smart_speaker_docker'
-    version =  '0.1.0'
+    //version =  '0.1.0'
 }
 
 sourceCompatibility = 1.8
