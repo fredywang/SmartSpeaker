@@ -28,7 +28,7 @@ sourceCompatibility = 1.8
 //targetCompatibility = 1.8
 
 repositories {
-    maven { url "http://172.17.0.3/repository/maven-central" }
+    maven { url "http://172.17.0.3:8081/repository/maven-central" }
     //mavenCentral()
     //maven { url "http://127.0.0.1:8088/repository/maven-central" }
     maven { url "http://repo.spring.io/libs-release" }
