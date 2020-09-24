@@ -89,7 +89,7 @@ if (hasProperty('buildScan')) {
     termsOfServiceAgree = 'no'
     }
 }
-
+/*
 task activeprofile() {
 	println "run set spring active profile = local"
 	bootRun.systemProperty 'spring.profiles.active', 'local'
@@ -100,4 +100,4 @@ task AutoDeployLocalRun() {
 	println "run AutoDeployLocalRun start"
 	dependsOn = ["clean","build","activeprofile","bootRun"]
 	description = "Auto Deploy Local Run"
-}
+} */
