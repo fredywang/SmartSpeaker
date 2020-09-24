@@ -19,7 +19,7 @@ public class SmartSpeakerController {
 	private static final Logger logger = LoggerFactory.getLogger(SmartSpeakerController.class);
 	
 	@RequestMapping(value="getOAuth")
-	public String getOAuth(HttpServletRequest request,@RequestParam(value="id") String id) {
+	public String getOAuth(HttpServletRequest request,@RequestParam(value="id", required = false) String id) {
 		String r = "id="+id+",連線成功";
 		logger.info(r);
 		return r;

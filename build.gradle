@@ -28,7 +28,9 @@ sourceCompatibility = 1.8
 //targetCompatibility = 1.8
 
 repositories {
-    maven { url "http://172.17.0.4/repository/maven-central" }
+    //maven { url "http://172.17.0.4/repository/maven-central" }
+    mavenCentral()
+    //maven { url "http://127.0.0.1:8088/repository/maven-central" }
     maven { url "http://repo.spring.io/libs-release" }
     maven { url "https://plugins.gradle.org/m2/"}
 }
@@ -86,4 +88,16 @@ if (hasProperty('buildScan')) {
     termsOfServiceUrl = 'https://gradle.com/terms-of-service'
     termsOfServiceAgree = 'no'
     }
+}
+
+task activeprofile() {
+	println "run set spring active profile = local"
+	bootRun.systemProperty 'spring.profiles.active', 'local'
+	description = "run set spring active profile = local"
+}
+
+task AutoDeployLocalRun() {
+	println "run AutoDeployLocalRun start"
+	dependsOn = ["clean","build","activeprofile","bootRun"]
+	description = "Auto Deploy Local Run"
 }
